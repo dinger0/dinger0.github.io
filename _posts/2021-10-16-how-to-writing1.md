@@ -58,7 +58,7 @@ toc: false
 
 ## 评论
 
-与TOC功能类似,你可以在 `_config.yml` 文件中全局设置 `comments` 字段，单独关闭某一篇文章的功能，需要在**Front Matter**配置中添加以下信息：
+与TOC功能类似,你可以在 `_config.yml` 文件中修改 `comments` 字段达到全局关闭评论的目的。若是单独关闭某一篇文章的评论，只需在**Front Matter**配置中添加以下信息：
 
 ```yaml
 ---
