@@ -2,8 +2,8 @@
 title: 写作教程1
 author: dinger0
 date: 2021-10-16 16:10:00 +0800
-categories: [博客, 教程]
-tags: [教程]
+categories: [技术, 教程]
+tags: [MarkDown]
 render_with_liquid: false
 image:
   src: /pics/0.jpg

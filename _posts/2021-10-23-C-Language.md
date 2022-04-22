@@ -2,7 +2,7 @@
 title: C语言的注意事项
 author: dinger0
 date: 2021-10-23 15:10:00 +0800
-categories: [博客, 教程]
+categories: [技术, 总结]
 tags: [C语言, C++]
 render_with_liquid: false
 math: false
@@ -13,13 +13,13 @@ math: false
 #  alt: image alternative text
 ---
 
-**记录一些自己写代码遇到的小问题，不定期更新**
+**记录一些自己写代码遇到的小问题，不定期更新。**
 
 ## 1. C/C++语言区别
 
 ### 1.1 malloc()函数
 
-在C++语言中，`malloc()` 返回的类型是 `void*` 指针，需要作类型转换，但是C语言不需要。
+在C++语言中，`malloc()` 返回的类型是 `void*` 指针，需要做类型转换，但是C语言不需要。
 
 ### 1.2 const
 
@@ -29,7 +29,7 @@ math: false
 
  - `const`右侧修饰的是什么，就是什么不能被**直接**修改。
 
-## 2. C语言的结构体和结构体指针
+## 2. C语言
 
 ### 2.1 结构体和结构体指针的访问
 
@@ -45,10 +45,10 @@ int main()
 {
     int a = 10;
     int b = 11;
-    const int * p1 = &a; //指针常量，即p2指向的地址的内容不能通过指针的形式进行修改，但p2指向的地址可变。
+    const int * p1 = &a; //指针常量，即p1指向的地址的内容不能通过指针的形式进行修改，但p1指向的地址可变。
     //*p1 = 11; //error:ssignment of read-only location ‘*p1’
     //p1 = &b; //无问题
-    int * const p2 =&b; //常量指针，即p1指向地址不可变，但p1指向的地址的内容可变。
+    int * const p2 =&b; //常量指针，即p2指向地址不可变，但p2指向的地址的内容可变。
     //*p2 = 11; //无问题
     //p2 = &a; //error: assignment of read-only variable ‘p2’
 
@@ -71,4 +71,37 @@ int main()
 ```
 `define`只是字符的替换，`typedef`作为一个新的类型。
 
+### 2.3 数组、形参和sizeof()函数
 
+```c
+#include <stdio.h>
+void fun(int *arr)
+{
+    printf("fun:%d\n", (int)(sizeof(arr) / sizeof(arr[0])));
+}
+int main()
+{
+    int arr[4] = {0};
+    printf("main():%d\n", (int)(sizeof(arr) / sizeof(arr[0]))); //main():4
+    fun(arr); //fun:2
+}
+```
+数组名做形参，传入的是数组首元素指针，另外，C语言不能实现函数默认参数。
+
+### 2.4 main()函数参数
+
+```c
+#include <stdio.h>
+int main(int argc, char** argv) //等价 int main(int argc, char* argv[])
+{
+    // argc表示参数个数，argv表示指向参数的指针数组。
+    // argv[0]:程序运行路径，argv[1]:运行路径后第1个字符串
+    // 运行命令：./a.out 0000      输出：2 0000
+    printf("%d\n", argc);
+    printf("%s\n", argv[1]);
+}
+```
+
+### 2.5 可变数组
+
+C99及以后版本支持不定长数组的声明,再也不要用malloc和free了。
